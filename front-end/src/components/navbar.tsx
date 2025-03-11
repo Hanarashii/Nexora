@@ -1,32 +1,73 @@
-import { Link,useLocation } from "react-router-dom";
-import { FaLaptop } from "react-icons/fa6";
+import { CubeIcon, MagnifyingGlassIcon, UserCircleIcon,ShoppingCartIcon } from '@heroicons/react/24/outline'
 
-const navbar = () => {
 
-    const location = useLocation();
-    
+import { Link } from "react-router-dom";
+
+
+const Navbar = () => {
+
+    const isUser = false;
+
     return (
-        <header className="w-screen h-[72px] border-b-[1px] py-3 px-2">
-            <nav className="flex justify-between items-center">
-                <div className="flex">
-                    <FaLaptop className="w-[40px] h-[40px] mr-2" />
-                    <Link to='/'><h1 className="font-bold font-[Roboto] text-[30px]">Nexora</h1></Link>
-                </div>
-                <div className="font-[Roboto]">
-                    <ul className="flex gap-x-8 text-xl">
-                        <li className={`${location.pathname === '/' ? 'underline font-bold' : ''}`}><Link to='/'>Home</Link></li>
-                        <li className={`${location.pathname === '/products' ? 'underline font-bold' : ''}`}><Link to='/products'>Products</Link></li>
-                        <li className={`${location.pathname === '/about_us' ? 'underline font-bold' : ''}`}><Link to='/about_us'>About Us</Link></li>
-                        <li className={`${location.pathname === '/contact' ? 'underline font-bold' : ''}`}><Link to='/contact'>Contact</Link></li>
+        <header className='border-b-1 font-[Roboto]'>
+            <nav className="w-dvw my-2 flex justify-between items-center px-4">
+                {/*Logo*/}
+                <Link to='/'>
+                    <div className="flex items-center cursor-pointer hover:text-blue-300">
+                        <CubeIcon className="w-12 h-12" />
+                        <h1 className="text-3xl font-bold">Nexora</h1>
+                    </div>
+                </Link>
+
+                {/*Navigate*/}
+                <div>
+                    <ul className="flex gap-4">
+                        <li className="cursor-pointer hover:text-blue-300 font-semibold"><Link to='/product'>Products</Link></li>
+                        <li className="cursor-pointer hover:text-blue-300 font-semibold"><Link to='/laptop'>Laptops</Link></li>
+                        <li className="cursor-pointer hover:text-blue-300 font-semibold"><Link to='/hardware'>Hardwares</Link></li>
+                        <li className="cursor-pointer hover:text-blue-300 font-semibold"><Link to='/monitors'>Monitors</Link></li>
+                        <li className="cursor-pointer hover:text-blue-300 font-semibold"><Link to='/accesories'>Accesories</Link></li>
+                        <li className="cursor-pointer hover:text-blue-300 font-semibold"><Link to='/support'>Support</Link></li>
                     </ul>
                 </div>
-                <div className="font-[Roboto] text-[20px] space-x-4 drop-down">
-                    <button className="border w-[100px] h-[40px] rounded-[5px] bg-black text-white"><Link to='/login'>Login</Link></button>
-                    <button className="border w-[100px] h-[40px] rounded-[5px] bg-black text-white"><Link to='/register'>Sign Up</Link></button>
+
+                {/*Search Bar*/}
+                <div className='relative'>
+                    <input type="text" className='border w-2xs h-8 rounded-sm px-2 hover:border-blue-300 focus:border-blue-300' placeholder='Search'/>
+                    <MagnifyingGlassIcon className='w-5 h-5 absolute right-2 top-1.5' />
+                </div>
+                
+                {/*Cart, Profile*/}
+                <div className='flex gap-x-4'>
+                    {
+                        isUser ? (
+                            <div>
+                                <div>
+                                    <UserCircleIcon className='w-8 h-8 cursor-pointer hover:text-blue-300' />
+                                </div>
+                                <div>
+                                    <a>Profile</a>
+                                    <a>Sign out</a>
+                                </div>
+                            </div>
+                        ) : (
+                            <div className='relative group'>
+                                <div className='flex gap-x-2 items-center cursor-default'>
+                                    <p>Guest</p>    
+                                    <UserCircleIcon className='w-8 h-8 cursor-pointer hover:text-blue-300' />
+                                </div>
+                                <div className='absolute mt-2 w-30 right-1 top-6 group-hover:block hidden shadow bg-white border rounded-lg'>
+                                    <Link to='/login' className='block hover:bg-gray-200 text-center rounded-t-lg'><a>Login</a></Link>
+                                    <Link to='/register' className='block hover:bg-gray-200 text-center rounded-b-lg'><a>Sign up</a></Link>
+                                </div>
+                            </div>
+                        )
+                    }
+                    <ShoppingCartIcon className='w-8 h-8 cursor-pointer hover:text-blue-300' />
                 </div>
             </nav>
         </header>
     )
 }
 
-export default navbar;
+export default Navbar;

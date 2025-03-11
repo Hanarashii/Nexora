@@ -1,42 +1,37 @@
-import { Link } from "react-router-dom";
+import Google from '../assets/google.svg'
+import Facebook from '../assets/facebook.svg'
+import { Link } from 'react-router-dom'
 
-const register = () => {
+const Register = () => {
     return (
-        <main className="w-screen h-full flex justify-center items-center font-[Roboto]">
-            <div className="w-[580px] h-[670px] flex flex-col justify-center items-center space-y-6 py-4 shadow-lg">
-                <div className="text-center">
-                    <h1 className="font-bold text-6xl">Sign Up</h1>
-                    <p className="font-bold text-base">Get your Nexora account now!</p>
+        <main className="flex justify-center items-center font-[Roboto]">
+            <div className="border flex flex-col h-fit justify-center items-center my-14  gap-y-4 p-8 rounded-lg shadow-xl">
+                <div className="text-center mb-6">
+                    <h1 className="font-bold text-6xl">Sign up</h1>
+                    <p className="font-semibold text-lg">Greetings, welcome to the page!</p>
+                </div>
+                {/*Username and Password*/}
+                <form className="flex flex-col gap-y-2">
+                    <input type="text" placeholder="Username" className="border w-sm h-10 rounded-sm px-2"/>
+                    <input type="email" placeholder='Email Adress' className='border w-sm h-10 rounded-sm px-2' />
+                    <input type="password" placeholder="Password" className="border w-sm h-10 rounded-sm px-2"/>
+                    <input type="password" placeholder='Confirm Password' className='border w-sm h-10 rounded-sm px-2' />
+                </form>
+
+                {/*Buttons and others*/}
+                <div className="flex flex-col">
+                    <button type='submit' className="border w-2xs h-10 rounded-lg bg-black text-white cursor-pointer">Sign in</button>    
+                </div>
+                <div className="flex flex-col gap-y-2">
+                    <button className="border h-10 w-60 flex items-center px-4 rounded-lg cursor-pointer"><img src={Google} className='w-8 h-8' alt="" />Continue with Google</button>
+                    <button className="border h-10 w-60 flex items-center px-4 rounded-lg cursor-pointer"><img src={Facebook} className='w-7 h-7 mr-1' alt="" />Continue with Facebook</button>
                 </div>
                 <div>
-                    <form action="" className="space-y-2">
-                        <div>
-                            <label htmlFor="username" className="block font-bold">Username</label>
-                            <input type="text" id='username' className="w-[468px] h-[48px] border rounded-[2px] block shadow-lg px-2" placeholder="exmapleusername"/>
-                        </div>
-                        <div>
-                            <label htmlFor="email" className="block font-bold">Email Adress</label>
-                            <input type="text" id='email' className="w-[468px] h-[48px] border rounded-[2px] block shadow-lg px-2"  placeholder="youremail@example.com"/>
-                        </div>
-                        <div>
-                            <label htmlFor="password" className="block font-bold">Password</label>
-                            <input type="password" id='password' className="w-[468px] h-[48px] border rounded-[2px] block shadow-lg px-2" placeholder="*********"/>
-                        </div>
-                        <div>
-                            <label htmlFor="confirm_password" className="block font-bold">Confirm Password</label>
-                            <input type="password" id='confirm_password' className="w-[468px] h-[48px] border rounded-[2px] block shadow-lg px-2" placeholder="*********"/>
-                        </div>
-                    </form>
-                </div>
-                <div className="mt-4 space-y-2">
-                    <button className="w-[468px] h-[48px] bg-black text-white font-bold">Sign Up</button>
-                    <div className="text-center">
-                        <p>Already have an account? <a className="font-bold underline"><Link to='/login'>Login</Link></a></p>
-                    </div>
+                    <p>Already have an account? <Link to='/login'><a href="#" className='underline hover:text-blue-300'>Log in.</a></Link></p>
                 </div>
             </div>
         </main>
     )
 }
 
-export default register;
+export default Register;
