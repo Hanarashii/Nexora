@@ -1,1 +1,29 @@
 @import "tailwindcss";
+
+@theme {
+    --animate-underline: underline 400ms linear 1 forwards;
+    @keyframes underline {
+        0% {
+            width: 0%;
+        }
+        50% {
+            width: 50%;
+        }
+        100% {
+            width: 100%;
+        }
+    }
+
+    --animate-viewbutton: viewbutton 400ms ease-in-out 1 forwards;
+    @keyframes viewbutton {
+        0% {
+            opacity: 0%;
+            bottom: 5rem;
+        }
+        100% {
+            opacity: 100%;
+            bottom: 6rem;
+        }
+    }
+
+}

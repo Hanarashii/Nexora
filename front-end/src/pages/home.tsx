@@ -25,6 +25,7 @@ const ProductCard = lazy(() => import('../components/product_card'))
 
 const Home = () => {
     const [CurrentGenre, setCurrentGenre] = useState('laptop')
+    console.log(CurrentGenre);
 
     const Products = [
         {
@@ -183,10 +184,22 @@ const Home = () => {
                 <div className='flex flex-col justify-center items-center space-y-10'>
                     <h1 className='text-4xl font-bold mb-2'>Product's Offers</h1>
                     <nav className='flex gap-x-10'>
-                        <button onClick={() => setCurrentGenre('laptop')} className={`${CurrentGenre === 'laptop' ? 'border-b-2 cursor-pointer flex items-center gap-x-2 text-2xl' : 'cursor-pointer flex items-center gap-x-2 text-2xl'}`}><CiLaptop />Laptops</button>
-                        <button onClick={() => setCurrentGenre('hardware')}  className={`${CurrentGenre === 'hardware' ? 'border-b-2 cursor-pointer flex items-center gap-x-2 text-2xl' : 'cursor-pointer flex items-center gap-x-2 text-2xl'}`}><GoCpu />Hardwares</button>
-                        <button onClick={() => setCurrentGenre('display')}  className={`${CurrentGenre === 'display' ? 'border-b-2 cursor-pointer flex items-center gap-x-2 text-2xl' : 'cursor-pointer flex items-center gap-x-2 text-2xl'}`}><CiMonitor />Displays</button>
-                        <button onClick={() => setCurrentGenre('accesories')} className={`${CurrentGenre === 'accesories' ? 'border-b-2 cursor-pointer flex items-center gap-x-2 text-2xl' : 'cursor-pointer flex items-center gap-x-2 text-2xl'}`}><CiDesktopMouse2 />Accesories</button>
+                        <button
+                        onClick={() => setCurrentGenre('laptop')}
+                        className={`${CurrentGenre === 'laptop' ? 'flex items-center text-2xl relative gap-x-2 px-4 py-2 cursor-pointer after:content-[""] after:absolute after:bg-black after:w-full after:h-0.5 after:bottom-0 after:left-0' : 'flex items-center text-2xl relative gap-x-2 px-4 py-2 cursor-pointer after:content-[""] after:bg-black after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 hover:after:animate-underline'}`}>
+                            <CiLaptop />Laptops</button>
+                        <button
+                        onClick={() => setCurrentGenre('hardware')}
+                        className={`${CurrentGenre === 'hardware' ? 'flex items-center text-2xl relative gap-x-2 px-4 py-2 cursor-pointer after:content-[""] after:absolute after:bg-black after:w-full after:h-0.5 after:bottom-0 after:left-0' : 'flex items-center text-2xl relative gap-x-2 px-4 py-2 cursor-pointer after:content-[""] after:bg-black after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 hover:after:animate-underline'}`}>
+                            <GoCpu />Hardwares</button>
+                        <button
+                        onClick={() => setCurrentGenre('display')}
+                        className={`${CurrentGenre === 'display' ? 'flex items-center text-2xl relative gap-x-2 px-4 py-2 cursor-pointer after:content-[""] after:absolute after:bg-black after:w-full after:h-0.5 after:bottom-0 after:left-0' : 'flex items-center text-2xl relative gap-x-2 px-4 py-2 cursor-pointer after:content-[""] after:bg-black after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 hover:after:animate-underline'}`}>
+                            <CiMonitor />Displays</button>
+                        <button
+                        onClick={() => setCurrentGenre('accesories')}
+                        className={`${CurrentGenre === 'accesories' ? 'flex items-center text-2xl relative gap-x-2 px-4 py-2 cursor-pointer after:content-[""] after:absolute after:bg-black after:w-full after:h-0.5 after:bottom-0 after:left-0' : 'flex items-center text-2xl relative gap-x-2 px-4 py-2 cursor-pointer after:content-[""] after:bg-black after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 hover:after:animate-underline'}`}>
+                            <CiDesktopMouse2 />Accesories</button>
                     </nav>
                     <div className='grid grid-cols-4 gap-4'>
                         {

@@ -63,7 +63,7 @@ const Navbar = () => {
                             </div>
                         )
                     }
-                    <ShoppingCartIcon className='w-8 h-8 cursor-pointer hover:text-blue-300' />
+                    <Link to='/cart'><ShoppingCartIcon className='w-8 h-8 cursor-pointer hover:text-blue-300' /></Link>
                 </div>
             </nav>
         </header>

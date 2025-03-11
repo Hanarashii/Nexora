@@ -21,8 +21,12 @@ const ProductCard = ({ product }) => {
                 }
             </div>
 
-                <Link to={`/product_detail/${product.id}`}><button className="absolute w-30 h-10 bg-blue-500 hover:bg-blue-700 cursor-pointer text-white rounded-lg bottom-24 left-3 opacity-0 group-hover:opacity-100">View product</button></Link>
-                <button className="absolute w-30 h-10 bg-blue-500 hover:bg-blue-700 cursor-pointer text-white rounded-lg bottom-24 right-3 opacity-0 group-hover:opacity-100">Add to cart</button>
+                <Link
+                 to={`/product_detail/${product.id}`}><button className="absolute w-30 h-10 bg-blue-500 hover:bg-blue-700 cursor-pointer text-white rounded-lg left-3 opacity-0 group-hover:animate-viewbutton">
+                    View product</button></Link>
+                <button
+                 className="absolute w-30 h-10 bg-blue-500 hover:bg-blue-700 cursor-pointer text-white rounded-lg right-3 opacity-0 group-hover:animate-viewbutton">
+                    Add to cart</button>
 
         </div>
     )
