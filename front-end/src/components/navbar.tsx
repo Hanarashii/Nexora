@@ -10,7 +10,7 @@ const Navbar = () => {
 
     return (
         <header className='border-b-1 font-[Roboto]'>
-            <nav className="w-dvw my-2 flex justify-between items-center px-4">
+            <nav className="my-2 flex justify-between items-center px-4">
                 {/*Logo*/}
                 <Link to='/'>
                     <div className="flex items-center cursor-pointer hover:text-blue-300">
@@ -25,7 +25,7 @@ const Navbar = () => {
                         <li className="cursor-pointer hover:text-blue-300 font-semibold"><Link to='/product'>Products</Link></li>
                         <li className="cursor-pointer hover:text-blue-300 font-semibold"><Link to='/laptop'>Laptops</Link></li>
                         <li className="cursor-pointer hover:text-blue-300 font-semibold"><Link to='/hardware'>Hardwares</Link></li>
-                        <li className="cursor-pointer hover:text-blue-300 font-semibold"><Link to='/monitors'>Monitors</Link></li>
+                        <li className="cursor-pointer hover:text-blue-300 font-semibold"><Link to='/monitors'>Displays</Link></li>
                         <li className="cursor-pointer hover:text-blue-300 font-semibold"><Link to='/accesories'>Accesories</Link></li>
                         <li className="cursor-pointer hover:text-blue-300 font-semibold"><Link to='/support'>Support</Link></li>
                     </ul>
@@ -41,7 +41,7 @@ const Navbar = () => {
                 <div className='flex gap-x-4'>
                     {
                         isUser ? (
-                            <div>
+                            <div className=''>
                                 <div>
                                     <UserCircleIcon className='w-8 h-8 cursor-pointer hover:text-blue-300' />
                                 </div>
@@ -56,9 +56,9 @@ const Navbar = () => {
                                     <p>Guest</p>    
                                     <UserCircleIcon className='w-8 h-8 cursor-pointer hover:text-blue-300' />
                                 </div>
-                                <div className='absolute mt-2 w-30 right-1 top-6 group-hover:block hidden shadow bg-white border rounded-lg'>
-                                    <Link to='/login' className='block hover:bg-gray-200 text-center rounded-t-lg'><a>Login</a></Link>
-                                    <Link to='/register' className='block hover:bg-gray-200 text-center rounded-b-lg'><a>Sign up</a></Link>
+                                <div className='absolute mt-2 w-30 right-1 top-6 group-hover:block hidden shadow bg-white border rounded-lg z-1'>
+                                    <Link to='/login' className='block hover:bg-gray-200 text-center rounded-t-lg'>Login</Link>
+                                    <Link to='/register' className='block hover:bg-gray-200 text-center rounded-b-lg'>Sign up</Link>
                                 </div>
                             </div>
                         )

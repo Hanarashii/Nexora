@@ -2,6 +2,7 @@ import { lazy } from "react";
 import { Route, Routes, BrowserRouter as Router } from "react-router-dom";
 
 const Navbar = lazy(() => import('./components/navbar'))
+const Footer = lazy(() => import('./components/footer'))
 
 const Home = lazy(() => import('./pages/home'))
 const Register = lazy(() => import('./pages/register'))
@@ -21,6 +22,7 @@ export default function App() {
 
             {/*Pages*/}
         </Routes>
+        <Footer />
     </ Router>
     )
 }

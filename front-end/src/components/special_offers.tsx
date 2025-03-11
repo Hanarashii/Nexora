@@ -1,7 +1,7 @@
-const SpecialOffers = ({ offers }) => {
+const SpecialOffers = ({ offer }) => {
     return (
-        <div className="">
-            <img src={offers.img} alt="" className="w-full"/>
+        <div className="cursor-pointer">
+            <img src={offer.img} alt="" className="w-full"/>
         </div>
     )
 }
