@@ -22,7 +22,7 @@ const Navbar = () => {
                 {/*Navigate*/}
                 <div>
                     <ul className="flex gap-4">
-                        <li className="cursor-pointer hover:text-blue-300 font-semibold"><Link to='/product'>Products</Link></li>
+                        <li className="cursor-pointer hover:text-blue-300 font-semibold"><Link to='/products'>Products</Link></li>
                         <li className="cursor-pointer hover:text-blue-300 font-semibold"><Link to='/laptop'>Laptops</Link></li>
                         <li className="cursor-pointer hover:text-blue-300 font-semibold"><Link to='/hardware'>Hardwares</Link></li>
                         <li className="cursor-pointer hover:text-blue-300 font-semibold"><Link to='/monitors'>Displays</Link></li>

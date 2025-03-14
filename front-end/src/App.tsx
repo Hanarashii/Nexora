@@ -7,7 +7,7 @@ const Footer = lazy(() => import('./components/footer'))
 const Home = lazy(() => import('./pages/home'))
 const Register = lazy(() => import('./pages/register'))
 const Login = lazy(() => import('./pages/login'))
-
+const Products = lazy(() => import('./pages/products'))
 
 export default function App() {
     return (
@@ -19,10 +19,10 @@ export default function App() {
             {/*Login and Register*/}
             <Route path='login' element={<Login />} />
             <Route path='register' element={<Register />} />
-
+            <Route path='products' element={<Products />} />
             {/*Pages*/}
         </Routes>
-        <Footer />
+        {/* <Footer /> */}
     </ Router>
     )
 }
