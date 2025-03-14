@@ -1,12 +1,20 @@
 import { CubeIcon, MagnifyingGlassIcon, UserCircleIcon,ShoppingCartIcon } from '@heroicons/react/24/outline'
 
-
+import { useEffect } from 'react';
+import { useState } from 'react';
 import { Link } from "react-router-dom";
-
+import { UseSelector, useDispatch } from 'react-redux';
 
 const Navbar = () => {
 
-    const isUser = false;
+    useEffect(() => {
+        fetch('http://localhost:3000/users')
+            .then(res => res.json())
+            .then(data => console.log(data))
+            .catch(err => console.error(err))
+    })
+
+    const isLogged = false;
 
     return (
         <header className='border-b-1 font-[Roboto]'>
@@ -40,14 +48,15 @@ const Navbar = () => {
                 {/*Cart, Profile*/}
                 <div className='flex gap-x-4'>
                     {
-                        isUser ? (
-                            <div className=''>
-                                <div>
+                        isLogged ? (
+                            <div className='relative group'>
+                                <div className='flex gap-x-2 items-center cursor-default'>
+                                    <p>Name</p>    
                                     <UserCircleIcon className='w-8 h-8 cursor-pointer hover:text-blue-300' />
                                 </div>
-                                <div>
-                                    <a>Profile</a>
-                                    <a>Sign out</a>
+                                <div className='absolute mt-2 w-30 right-1 top-6 group-hover:block hidden shadow bg-white border rounded-lg z-1'>
+                                    <Link to='/profile' className='block hover:bg-gray-200 text-center rounded-t-lg'>Profile</Link>
+                                    <button className='w-full text-center hover:bg-gray-200 rounded-t-lg'>Sign out</button>
                                 </div>
                             </div>
                         ) : (

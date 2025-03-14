@@ -28,6 +28,7 @@ const Home = () => {
     const [CurrentGenre, setCurrentGenre] = useState(1)
     console.log(CurrentGenre);
 
+
     const[Products,setProducts] = useState([]);
 
     useEffect(() => {
@@ -37,55 +38,6 @@ const Home = () => {
         .catch(err => console.error(err))
     },[]);
 
-    if(Products.length > 0) console.log(Products[0].category_id)
-
-    // const Products = [
-    //     {
-    //         id: 1,
-    //         name: 'ASUS TUF F15',
-    //         discount: true,
-    //         offer_price: '17.800.000đ',
-    //         price: '20.000.000đ',
-    //         genre: 'laptop',
-    //         img: asus_tuf_f15,
-    //     },
-    //     {
-    //         id: 2,
-    //         name: 'ASUS SWIFT PLAY',
-    //         discount: true,
-    //         offer_price: '3.680.000đ',
-    //         price: '4.380.000đ',
-    //         genre: 'display',
-    //         img: asus_swiftplay,
-    //     },
-    //     {
-    //         id: 3,
-    //         name: 'HYPERX CLOUD STINGER III',
-    //         discount: false,
-    //         offer_price: null,
-    //         price: '6.680.000đ',
-    //         genre: 'accesories',
-    //         img: hyperx_cloud_stinger,
-    //     },
-    //     {
-    //         id: 4,
-    //         name: 'LOGITECH G502 HERO',
-    //         discount: true,
-    //         offer_price: '480.000đ',
-    //         price: '520.000đ',
-    //         genre: 'accesories',
-    //         img: logitech_mouse,
-    //     },
-    //     {
-    //         id: 5,
-    //         name: 'CORSAIR K520 LOWPROFILE',
-    //         discount: true,
-    //         offer_price: '1.280.000đ',
-    //         price: '2.000.000đ',
-    //         genre: 'accesories',
-    //         img: corsair_keyboard,
-    //     },
-    // ]
 
     const Offers = [
         {
