@@ -11,23 +11,31 @@ const Register = () => {
     const [confirmPassword, setConfirmPassword] = useState('');
     const [email,setEmail] = useState('');
 
+    const PostAPI = async() => {
+        try {
+            const res = await fetch('http://localhost:3000/users/register',{
+                method: 'POST',
+                headers: {'Content-Type' : 'application/json'},
+                body: JSON.stringify({
+                username: username,
+                email: email,
+                role: 'customer',
+                password: password,
+                })
+            })
+            const response = await res.json();
+            console.log(response);
+        }
+        catch (err) {
+            console.error(err);
+        }
+    }
+
     const HandleRegister = () => {
         if(password !== confirmPassword) alert('Passwords does not match!');
         else if (username === '' || email === '' || password === '') alert('You must fill the form!');
         else {
-            fetch('http://localhost:3000/users',{
-                method: 'POST',
-                headers: {'Content-Type' : 'application/json'},
-                body: JSON.stringify ({
-                    username: username,
-                    email: email,
-                    role: 'customer',
-                    password: password,
-                })
-            })
-            .then(res => res.json())
-            .then(data => console.log(data))
-            .catch(err => console.error(err))
+        PostAPI();
     }
     }
 

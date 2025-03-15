@@ -19,7 +19,6 @@ import { CiLaptop, CiDesktopMouse2, CiMonitor } from "react-icons/ci";
 import { GoCpu } from "react-icons/go";
 
 import { useState } from 'react'
-import { data } from 'react-router-dom'
 
 const SpecialOffers = lazy(() => import('../components/special_offers'))
 const ProductCard = lazy(() => import('../components/product_card'))
@@ -29,15 +28,21 @@ const Home = () => {
     console.log(CurrentGenre);
 
 
-    const[Products,setProducts] = useState([]);
+    const[Products,setProducts] = useState<{ id: number, category_id: number, [key: string]: any }[]>([]);
 
     useEffect(() => {
-        fetch('http://localhost:3000/products')
-        .then (res => res.json())
-        .then(data => setProducts(data))
-        .catch(err => console.error(err))
-    },[]);
-
+        const connect = async() => {
+            try {
+                const res = await fetch('http://localhost:3000/products');
+                const response = await res.json();
+                setProducts(response);
+            }
+            catch (err) {
+                console.error(err);
+            }
+        }
+        connect();
+    },[])
 
     const Offers = [
         {

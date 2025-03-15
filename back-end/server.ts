@@ -2,6 +2,7 @@ import express from 'express'
 import { Request, Response } from 'express';
 import mysql from 'mysql2'
 import { json } from 'stream/consumers';
+import bcrypt from 'bcrypt'
 
 const cors = require('cors')
 
@@ -37,13 +38,39 @@ app.get('/users',(req: Request, res:Response) => {
     })
 })
 
-app.post('/users', (req: Request, res:Response) => {
+app.post('/users/register', async (req: Request, res:Response) => {
     const {username, email, role, password} = req.body;
-    const query = ('INSERT INTO users (username, email, role, password) VALUES(?, ?, ?, ?)');
-    const values = [username, email, role, password];
-    database.query(query, values,(err,result) => {
-        if(err) res.status(500).json({error: err.message});
-        else res.status(200).json({message:"Added Successfully"});
+    try {
+        const hashedPassword = await bcrypt.hash(password, 10);
+        const query = ('INSERT INTO users (username, email, role, password) VALUES(?, ?, ?, ?)');
+        const values = [username, email, role, hashedPassword];
+        database.query(query, values,(err,result) => {
+            if(err) res.status(500).json({error: err.message});
+            else res.status(200).json({message:"Added Successfully"});
+        })
+    }
+    catch (err) {
+        res.status(500).json({error: (err as Error).message})
+    }
+})
+
+app.post('/users/login', (req: Request, res: Response) => {
+    const username = req.body.username;
+    const password = req.body.password
+    const query = 'SELECT username, password from users WHERE username = ?';
+    const values = [username];
+    database.query(query, values, async (err, result: mysql.RowDataPacket[]) => {
+        if (err) console.error(err);
+        else if (result.length === 0) res.status(401).json({status: 'failed', message:'Wrong username or password!'})
+        else {
+            const user = result[0];
+            console.log(user.password, password)
+            const isPasswordValid = await bcrypt.compare(password, user.password)
+            if(isPasswordValid) { 
+                res.status(200).json(result)
+            }
+            else res.status(401).json({status: 'failed', message:'Wrong username or password!'})
+    }
     })
 })
 

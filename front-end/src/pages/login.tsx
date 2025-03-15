@@ -1,17 +1,44 @@
 import Google from '../assets/google.svg'
 import Facebook from '../assets/facebook.svg'
 
-import { useRef } from 'react'
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
+
+import { login } from '../redux/userSlice'
+import { useDispatch } from 'react-redux'
 
 const Login = () => {
 
-    const username = useRef(null);
-    const password = useRef(null);
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+    const dispatch = useDispatch();
 
-    const HandleLogin = () => {
-        console.log(username.current.value);
-        console.log(password.current.value);
+    const HandleLogin = async() => {
+        if (username === '' || password === '') alert('You must fill the form')
+        else {
+            try {
+                const res = await fetch('http://localhost:3000/users/login',{
+                    method: 'POST',
+                    headers: {'Content-Type' : 'application/json'},
+                    body: JSON.stringify({
+                        username: username,
+                        password: password,
+                    })
+                })
+                const response = await res.json();
+                if (response.status === 'failed') {
+                    alert(response.message)
+                }
+                else {
+                    const role = response.role;
+                    dispatch(login({ username, role }))
+                }
+            }
+            catch (err) {
+                console.error(err);
+            }
+
+        };
     }
 
     return (
@@ -23,8 +50,8 @@ const Login = () => {
                 </div>
                 {/*Username and Password*/}
                 <form className="flex flex-col gap-y-2">
-                    <input ref={username} type="text" placeholder="Username" className="border w-sm h-10 rounded-sm px-2"/>
-                    <input ref={password} type="password" placeholder="Password" className="border w-sm h-10 rounded-sm px-2"/>
+                    <input onChange={(e) => {setUsername(e.target.value)}} type="text" placeholder="Username" className="border w-sm h-10 rounded-sm px-2"/>
+                    <input onChange={(e) => {setPassword(e.target.value)}} type="password" placeholder="Password" className="border w-sm h-10 rounded-sm px-2"/>
                 </form>
 
                 <div className="flex justify-between gap-x-34">
@@ -46,7 +73,7 @@ const Login = () => {
                     <button className="border h-10 w-60 flex items-center px-4 rounded-lg cursor-pointer"><img src={Facebook} className='w-7 h-7 mr-1' alt="" />Continue with Facebook</button>
                 </div>
                 <div>
-                    <p>Don't have an account? <Link to='/register'><a href="#" className='underline hover:text-blue-300'>Sign up.</a></Link></p>
+                    <p>Don't have an account? <Link to='/register'  className='underline hover:text-blue-300'>Sign up.</Link></p>
                 </div>
             </div>
         </main>

@@ -79,11 +79,11 @@ const products = () => {
 
             {/*Pagination*/}
             <div className='w-full flex justify-center items-center'>
-                <button className='flex items-center justify-center w-12 h-12 rounded-full hover:bg-gray-300 cursor-pointer'><BackwardIcon className='w-10 h-10'/></button>
+                <button className='flex items-center justify-center w-12 h-12 rounded-full hover:bg-gray-300 cursor-pointer'>{<BackwardIcon className='w-10 h-10'/>}</button>
                 <button className='flex items-center justify-center font-bold w-12 h-12 rounded-full hover:bg-gray-300 cursor-pointer'>1</button>
                 <button className='flex items-center justify-center font-bold w-12 h-12 rounded-full hover:bg-gray-300 cursor-pointer'>2</button>
                 <button className='flex items-center justify-center font-bold w-12 h-12 rounded-full hover:bg-gray-300 cursor-pointer'>3</button>
-                <button className='flex items-center justify-center w-12 h-12 rounded-full hover:bg-gray-300 cursor-pointer'><ForwardIcon className='w-10 h-10'/></button>
+                <button className='flex items-center justify-center w-12 h-12 rounded-full hover:bg-gray-300 cursor-pointer'>{<ForwardIcon className='w-10 h-10'/>}</button>
             </div>
         </main>
     )

@@ -1,20 +1,19 @@
 import { CubeIcon, MagnifyingGlassIcon, UserCircleIcon,ShoppingCartIcon } from '@heroicons/react/24/outline'
 
-import { useEffect } from 'react';
-import { useState } from 'react';
 import { Link } from "react-router-dom";
-import { UseSelector, useDispatch } from 'react-redux';
+import { logout } from '../redux/userSlice';
+import { useSelector ,useDispatch } from 'react-redux';
 
 const Navbar = () => {
 
-    useEffect(() => {
-        fetch('http://localhost:3000/users')
-            .then(res => res.json())
-            .then(data => console.log(data))
-            .catch(err => console.error(err))
-    })
+    const dispatch = useDispatch();
+    const username = useSelector((state: { user: { username: string } }) => state.user.username)
+    const isLogged = useSelector((state: { user: { isLoggedIn: boolean } }) => state.user.isLoggedIn)
+    const isAdmin = useSelector((state: { user: { role: string } }) => state.user.role)
 
-    const isLogged = false;
+    const HandleLogout = () => {
+        dispatch(logout())
+    }
 
     return (
         <header className='border-b-1 font-[Roboto]'>
@@ -49,16 +48,29 @@ const Navbar = () => {
                 <div className='flex gap-x-4'>
                     {
                         isLogged ? (
-                            <div className='relative group'>
+                            (isAdmin === 'admin') ? (
+                                <div className='relative group'>
                                 <div className='flex gap-x-2 items-center cursor-default'>
-                                    <p>Name</p>    
-                                    <UserCircleIcon className='w-8 h-8 cursor-pointer hover:text-blue-300' />
+                                    <p>{username}</p>    
+                                    <Link to='/profile'><UserCircleIcon className='w-8 h-8 cursor-pointer hover:text-blue-300' /></Link>
+                                </div>
+                                <div className='absolute mt-2 w-30 right-1 top-6 group-hover:block hidden shadow bg-white border rounded-lg z-1'>
+                                    <Link to='/admin_profile' className='block hover:bg-gray-200 text-center rounded-t-lg'>Profile</Link>
+                                    <button onClick={HandleLogout} className='w-full text-center hover:bg-gray-200 rounded-b-lg cursor-pointer'>Sign out</button>
+                                </div>
+                            </div>
+                            ) : (
+                                <div className='relative group'>
+                                <div className='flex gap-x-2 items-center cursor-default'>
+                                    <p>{username}</p>    
+                                    <Link to='/profile'><UserCircleIcon className='w-8 h-8 cursor-pointer hover:text-blue-300' /></Link>
                                 </div>
                                 <div className='absolute mt-2 w-30 right-1 top-6 group-hover:block hidden shadow bg-white border rounded-lg z-1'>
                                     <Link to='/profile' className='block hover:bg-gray-200 text-center rounded-t-lg'>Profile</Link>
-                                    <button className='w-full text-center hover:bg-gray-200 rounded-t-lg'>Sign out</button>
+                                    <button onClick={HandleLogout} className='w-full text-center hover:bg-gray-200 rounded-b-lg cursor-pointer'>Sign out</button>
                                 </div>
                             </div>
+                            )
                         ) : (
                             <div className='relative group'>
                                 <div className='flex gap-x-2 items-center cursor-default'>
