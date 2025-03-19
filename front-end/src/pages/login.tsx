@@ -30,14 +30,14 @@ const Login = () => {
                     alert(response.message)
                 }
                 else {
-                    const role = response.role;
-                    dispatch(login({ username, role }))
+                    const id = response[0].id
+                    const role = response[0].role;
+                    dispatch(login({ id, username, role }))
                 }
             }
             catch (err) {
                 console.error(err);
             }
-
         };
     }
 

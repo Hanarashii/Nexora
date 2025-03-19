@@ -1,6 +1,8 @@
 const AdminPage = () => {
     return (
-        <main></main>
+        <main>
+            
+        </main>
     )
 }
 

@@ -9,7 +9,10 @@ const Navbar = () => {
     const dispatch = useDispatch();
     const username = useSelector((state: { user: { username: string } }) => state.user.username)
     const isLogged = useSelector((state: { user: { isLoggedIn: boolean } }) => state.user.isLoggedIn)
-    const isAdmin = useSelector((state: { user: { role: string } }) => state.user.role)
+    const role = useSelector((state: { user: { role: string } }) => state.user.role)
+
+
+    console.log(role)
 
     const HandleLogout = () => {
         dispatch(logout())
@@ -48,28 +51,28 @@ const Navbar = () => {
                 <div className='flex gap-x-4'>
                     {
                         isLogged ? (
-                            (isAdmin === 'admin') ? (
+                            role === 'admin' ? (
                                 <div className='relative group'>
-                                <div className='flex gap-x-2 items-center cursor-default'>
-                                    <p>{username}</p>    
-                                    <Link to='/profile'><UserCircleIcon className='w-8 h-8 cursor-pointer hover:text-blue-300' /></Link>
+                                    <div className='flex gap-x-2 items-center cursor-default'>
+                                        <p>{username}</p>    
+                                        <Link to='/profile'><UserCircleIcon className='w-8 h-8 cursor-pointer hover:text-blue-300' /></Link>
+                                    </div>
+                                    <div className='absolute mt-2 w-30 right-1 top-6 group-hover:block hidden shadow bg-white border rounded-lg z-1'>
+                                        <Link to='/admin_profile' className='block hover:bg-gray-200 text-center rounded-t-lg'>Admin Page</Link>
+                                        <button onClick={HandleLogout} className='w-full text-center hover:bg-gray-200 rounded-b-lg cursor-pointer'>Sign out</button>
+                                    </div>
                                 </div>
-                                <div className='absolute mt-2 w-30 right-1 top-6 group-hover:block hidden shadow bg-white border rounded-lg z-1'>
-                                    <Link to='/admin_profile' className='block hover:bg-gray-200 text-center rounded-t-lg'>Profile</Link>
-                                    <button onClick={HandleLogout} className='w-full text-center hover:bg-gray-200 rounded-b-lg cursor-pointer'>Sign out</button>
-                                </div>
-                            </div>
                             ) : (
                                 <div className='relative group'>
-                                <div className='flex gap-x-2 items-center cursor-default'>
-                                    <p>{username}</p>    
-                                    <Link to='/profile'><UserCircleIcon className='w-8 h-8 cursor-pointer hover:text-blue-300' /></Link>
+                                    <div className='flex gap-x-2 items-center cursor-default'>
+                                        <p>{username}</p>    
+                                        <Link to='/profile'><UserCircleIcon className='w-8 h-8 cursor-pointer hover:text-blue-300' /></Link>
+                                    </div>
+                                    <div className='absolute mt-2 w-30 right-1 top-6 group-hover:block hidden shadow bg-white border rounded-lg z-1'>
+                                        <Link to='/profile' className='block hover:bg-gray-200 text-center rounded-t-lg'>Profile</Link>
+                                        <button onClick={HandleLogout} className='w-full text-center hover:bg-gray-200 rounded-b-lg cursor-pointer'>Sign out</button>
+                                    </div>
                                 </div>
-                                <div className='absolute mt-2 w-30 right-1 top-6 group-hover:block hidden shadow bg-white border rounded-lg z-1'>
-                                    <Link to='/profile' className='block hover:bg-gray-200 text-center rounded-t-lg'>Profile</Link>
-                                    <button onClick={HandleLogout} className='w-full text-center hover:bg-gray-200 rounded-b-lg cursor-pointer'>Sign out</button>
-                                </div>
-                            </div>
                             )
                         ) : (
                             <div className='relative group'>

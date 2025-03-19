@@ -1,6 +1,11 @@
 import { Link } from "react-router-dom"
+import Product from "../type/product";
 
-const ProductCard = ({ product }) => {
+interface ProductCardProps {
+    product: Product;
+}
+
+const ProductCard = ({ product }: ProductCardProps) => {
 
     return (
         <div
@@ -9,14 +14,14 @@ const ProductCard = ({ product }) => {
             <div className="text-left w-full px-2">
                 <h3 className="text- [20px] font-bold truncate">{product.name}</h3>
                 {
-                    product.discount ? (
+                    product.formatted_discount_price ? (
                     <div className="space-x-4">
-                        <p className="inline line-through text-gray-700">{product.price}</p>
-                        <p className="inline text-red-500">{product.offer_price}</p>
+                        <p className="inline line-through text-gray-700">{product.formatted_price}đ</p>
+                        <p className="inline text-red-500">{product.formatted_discount_price}đ</p>
                     </div>
                     )
                      : (
-                        <p className=" text-red-500">{product.price}</p>
+                        <p className=" text-red-500">{product.formatted_price}đ</p>
                     )
                 }
             </div>
