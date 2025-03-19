@@ -6,12 +6,14 @@ import { Link } from 'react-router-dom'
 
 import { login } from '../redux/userSlice'
 import { useDispatch } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 
 const Login = () => {
 
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const dispatch = useDispatch();
+    const nav = useNavigate();
 
     const HandleLogin = async() => {
         if (username === '' || password === '') alert('You must fill the form')
@@ -32,7 +34,8 @@ const Login = () => {
                 else {
                     const id = response[0].id
                     const role = response[0].role;
-                    dispatch(login({ id, username, role }))
+                    dispatch(login({ id, username, role }));
+                    nav('/');
                 }
             }
             catch (err) {

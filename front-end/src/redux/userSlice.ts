@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 
 const userData = (JSON.parse(localStorage.getItem('user') || '') || {
-    id: '0',
+    id: 0,
     name: 'Guest',
     password: '',
     isLoggedIn: false,

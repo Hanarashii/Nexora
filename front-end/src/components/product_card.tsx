@@ -1,11 +1,38 @@
 import { Link } from "react-router-dom"
 import Product from "../type/product";
+import { useSelector } from "react-redux";
+import RootState from "../type/rootstate";
+import { useNavigate } from "react-router-dom";
 
 interface ProductCardProps {
     product: Product;
 }
 
 const ProductCard = ({ product }: ProductCardProps) => {
+
+    const user = useSelector((state : RootState) => state.user)
+    const nav = useNavigate()
+
+    const HandleAddToCart = () => {
+        if (!user.isLoggedIn) {
+            nav('/login')
+        }
+        else {
+            const fetchAPI = async() => {
+                const req = await fetch('http://localhost:3000/cart/add', {
+                    method: 'POST',
+                    headers: {'Content-Type' : 'application/json'},
+                    body: JSON.stringify({
+                        user_id: user.id,
+                        product_id: product.id,
+                    })
+                })
+                const res = await req.json();
+                alert (res.message)
+            }
+            fetchAPI()
+        }
+    }
 
     return (
         <div
@@ -32,6 +59,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
                  className="absolute w-30 h-10 bg-blue-500 hover:bg-blue-700 cursor-pointer text-white rounded-lg left-3 opacity-0 group-hover:animate-viewbutton">
                     View product</button></Link>
                 <button
+                onClick={HandleAddToCart}
                  className="absolute w-30 h-10 bg-blue-500 hover:bg-blue-700 cursor-pointer text-white rounded-lg right-3 opacity-0 group-hover:animate-viewbutton">
                     Add to cart</button>
 

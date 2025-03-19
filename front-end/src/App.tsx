@@ -1,5 +1,6 @@
 import { lazy } from "react";
 import { Route, Routes, BrowserRouter as Router } from "react-router-dom";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 
 // const ProtectedRoute = lazy(() => import('./components/ProtectedRoute'))
@@ -20,6 +21,7 @@ export default function App() {
         <Navbar />
         <Routes>
             <Route path="/" element={<Home />} />
+            <Route path='home' element={<Home />} />
 
             {/*Login and Register*/}
             <Route path='login' element={<Login />} />
@@ -29,7 +31,9 @@ export default function App() {
             <Route path="admin_profile" element={<AdminPage />}/>
             <Route path='products' element={<Products />} />
             <Route path="cart" element={
-                <Cart />
+                <ProtectedRoute>
+                    <Cart />
+                </ProtectedRoute>
             } />
         </Routes>
         {/* <Footer /> */}

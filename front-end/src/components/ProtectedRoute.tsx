@@ -8,10 +8,10 @@ interface ProtectedRouteProps {
     children: ReactNode
 }
 
-const user = useSelector((state : RootState) => state.user)
 
 const ProtectedRoute = ({ children } : ProtectedRouteProps) => {
+    const user = useSelector((state : RootState) => state.user)
     return user.isLoggedIn ? children : <Navigate to='/login' />
 }
 
-export default ProtectedRoute
+export default ProtectedRoute;
