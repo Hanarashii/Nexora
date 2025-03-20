@@ -1,27 +1,28 @@
-import Product from '../type/product';
+
 import RootState from '../type/rootstate';
+import ProductCardProps from '../type/productcard';
 
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
+import { useEffect } from 'react';
 
-const ProductCart = ({ product } : {product: Product}) => {
+const ProductCart = ({ product } : ProductCardProps) => {
 
     const user = useSelector((state : RootState) => state.user)
 
-    const [count, setCount] = useState(1);
-
-
+    const [number, setNumber] = useState(product.number);
 
     const HandleRemove = () => {
-        const fetchAPI = async() => {
+        const Remove = async() => {
             try {
-                const req = await fetch('http://localhost:3000/cart/remove', {
+                const req = await fetch('http://localhost:3000/cart/remove_button', {
                     method: 'POST',
                     headers: {'Content-Type' : 'application/json'},
                     body: JSON.stringify({
                         user_id: user.id,
                         product_id: product.id,
+                        number: number,
                     })
                 })
                 const res = await req.json()
@@ -31,7 +32,40 @@ const ProductCart = ({ product } : {product: Product}) => {
                 console.error(error)
             }
         }
-        fetchAPI();
+        Remove();
+    }
+
+    const QuantityUpdate = async() => {
+        try {
+            const req = await fetch('http://localhost:3000/cart/add&subtract', {
+                method: 'POST',
+                headers: {"Content-Type" : "application/json"},
+                body: JSON.stringify({
+                    user_id: user.id,
+                    product_id: product.id,
+                    number: number,
+                })
+            })
+            const res = await req.json()
+            console.log(res.message)
+    }
+    catch (err) {
+        console.error(err)
+    }
+}
+
+useEffect(() => {
+    QuantityUpdate()
+}, [number])
+
+    const HandleSubtractNumber = () => {
+        setNumber(number - 1)
+        QuantityUpdate();
+    }
+
+    const HandleAddNumber = () => {
+        setNumber(number + 1);
+        QuantityUpdate();
     }
 
     return (
@@ -56,9 +90,9 @@ const ProductCart = ({ product } : {product: Product}) => {
             }
             {/*Add or Remove*/}
             <div className='flex w-fit h-fit absolute cursor-default justify-center items-center space-x-2 rounded-lg p-0.5 top-30 left-42'>
-                <button onClick={() => setCount(count - 1)} disabled={count === 1} className='border rounded-lg w-6 h-4 flex items-center justify-center cursor-pointer'>-</button>
-                <p>{count}</p>
-                <button onClick={() => setCount(count + 1)} className='border rounded-lg w-6 h-4 flex items-center justify-center cursor-pointer'>+</button>
+                <button onClick={HandleSubtractNumber} disabled={number === 1} className='border rounded-lg w-6 h-4 flex items-center justify-center cursor-pointer'>-</button>
+                <p>{number}</p>
+                <button onClick={HandleAddNumber} className='border rounded-lg w-6 h-4 flex items-center justify-center cursor-pointer'>+</button>
             </div>
             {/*View Product*/}
             <Link

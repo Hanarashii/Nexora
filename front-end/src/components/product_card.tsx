@@ -1,12 +1,8 @@
 import { Link } from "react-router-dom"
-import Product from "../type/product";
 import { useSelector } from "react-redux";
 import RootState from "../type/rootstate";
 import { useNavigate } from "react-router-dom";
-
-interface ProductCardProps {
-    product: Product;
-}
+import ProductCardProps from "../type/productcard";
 
 const ProductCard = ({ product }: ProductCardProps) => {
 

@@ -105,19 +105,19 @@ const Home = () => {
                         <nav className='flex gap-x-10'>
                             <button
                             onClick={() => setCurrentGenre(1)}
-                            className={`${(CurrentGenre === 1) ? 'flex items-center text-2xl relative gap-x-2 px-4 py-2 cursor-pointer after:content-[""] after:absolute after:bg-black after:w-full after:h-0.5 after:bottom-0 after:left-0' : 'flex items-center text-2xl relative gap-x-2 px-4 py-2 cursor-pointer after:content-[""] after:bg-black after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 hover:after:animate-underline'}`}>
+                            className={`${(CurrentGenre === 1) ? 'flex items-center text-2xl relative gap-x-2 px-4 py-2 cursor-pointer after:content-[""] after:absolute after:bg-black after:w-full after:h-0.5 after:bottom-0 after:left-0' : 'flex items-center text-2xl relative gap-x-2 px-4 py-2 cursor-pointer after:content-[""] after:bg-black after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 hover:after:animate-underline-forward after:animate-underline-backward'}`}>
                                 <CiLaptop />Laptops</button>
                             <button
                             onClick={() => setCurrentGenre(2)}
-                            className={`${(CurrentGenre === 2) ? 'flex items-center text-2xl relative gap-x-2 px-4 py-2 cursor-pointer after:content-[""] after:absolute after:bg-black after:w-full after:h-0.5 after:bottom-0 after:left-0' : 'flex items-center text-2xl relative gap-x-2 px-4 py-2 cursor-pointer after:content-[""] after:bg-black after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 hover:after:animate-underline'}`}>
+                            className={`${(CurrentGenre === 2) ? 'flex items-center text-2xl relative gap-x-2 px-4 py-2 cursor-pointer after:content-[""] after:absolute after:bg-black after:w-full after:h-0.5 after:bottom-0 after:left-0' : 'flex items-center text-2xl relative gap-x-2 px-4 py-2 cursor-pointer after:content-[""] after:bg-black after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 hover:after:animate-underline-forward after:animate-underline-backward'}`}>
                                 <GoCpu />Hardwares</button>
                             <button
                             onClick={() => setCurrentGenre(3)}
-                            className={`${(CurrentGenre === 3) ? 'flex items-center text-2xl relative gap-x-2 px-4 py-2 cursor-pointer after:content-[""] after:absolute after:bg-black after:w-full after:h-0.5 after:bottom-0 after:left-0' : 'flex items-center text-2xl relative gap-x-2 px-4 py-2 cursor-pointer after:content-[""] after:bg-black after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 hover:after:animate-underline'}`}>
+                            className={`${(CurrentGenre === 3) ? 'flex items-center text-2xl relative gap-x-2 px-4 py-2 cursor-pointer after:content-[""] after:absolute after:bg-black after:w-full after:h-0.5 after:bottom-0 after:left-0' : 'flex items-center text-2xl relative gap-x-2 px-4 py-2 cursor-pointer after:content-[""] after:bg-black after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 hover:after:animate-underline-forward after:animate-underline-backward'}`}>
                                 <CiMonitor />Displays</button>
                             <button
                             onClick={() => setCurrentGenre(4)}
-                            className={`${(CurrentGenre === 4) ? 'flex items-center text-2xl relative gap-x-2 px-4 py-2 cursor-pointer after:content-[""] after:absolute after:bg-black after:w-full after:h-0.5 after:bottom-0 after:left-0' : 'flex items-center text-2xl relative gap-x-2 px-4 py-2 cursor-pointer after:content-[""] after:bg-black after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 hover:after:animate-underline'}`}>
+                            className={`${(CurrentGenre === 4) ? 'flex items-center text-2xl relative gap-x-2 px-4 py-2 cursor-pointer after:content-[""] after:absolute after:bg-black after:w-full after:h-0.5 after:bottom-0 after:left-0' : 'flex items-center text-2xl relative gap-x-2 px-4 py-2 cursor-pointer after:content-[""] after:bg-black after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 hover:after:animate-underline-forward after:animate-underline-backward'}`}>
                                 <CiDesktopMouse2 />Accesories</button>
                         </nav>
                         {(Products.length > 0) ? (

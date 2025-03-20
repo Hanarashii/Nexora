@@ -3,9 +3,11 @@ import { CubeIcon, MagnifyingGlassIcon, UserCircleIcon,ShoppingCartIcon } from '
 import { Link } from "react-router-dom";
 import { logout } from '../redux/userSlice';
 import { useSelector ,useDispatch } from 'react-redux';
+import { useState } from 'react';
 
 const Navbar = () => {
 
+    const [menu, setMenu] = useState(false)
     const dispatch = useDispatch();
     const username = useSelector((state: { user: { username: string } }) => state.user.username)
     const isLogged = useSelector((state: { user: { isLoggedIn: boolean } }) => state.user.isLoggedIn)
@@ -55,10 +57,10 @@ const Navbar = () => {
                                 <div className='relative group'>
                                     <div className='flex gap-x-2 items-center cursor-default'>
                                         <p>{username}</p>    
-                                        <Link to='/profile'><UserCircleIcon className='w-8 h-8 cursor-pointer hover:text-blue-300' /></Link>
+                                        <button onClick={() => setMenu(!menu)}>{<UserCircleIcon className='w-8 h-8 cursor-pointer hover:text-blue-300' />}</button>
                                     </div>
-                                    <div className='absolute mt-2 w-30 right-1 top-6 group-hover:block hidden shadow bg-white border rounded-lg z-1'>
-                                        <Link to='/admin_profile' className='block hover:bg-gray-200 text-center rounded-t-lg'>Admin Page</Link>
+                                    <div className={`${menu ? "absolute mt-2 w-30 right-1 top-6 shadow bg-white border opacity-0 scale-95 rounded-lg z-1 animate-dropdown-open" : "absolute mt-2 w-30 right-1 top-6  opacity-100 scale-100 bg-white border rounded-lg z-1 animate-dropdown-close"}`}>
+                                        <Link to='/admin_dashboard' className='block hover:bg-gray-200 text-center rounded-t-lg'>Dashboard</Link>
                                         <button onClick={HandleLogout} className='w-full text-center hover:bg-gray-200 rounded-b-lg cursor-pointer'>Sign out</button>
                                     </div>
                                 </div>
@@ -66,9 +68,9 @@ const Navbar = () => {
                                 <div className='relative group'>
                                     <div className='flex gap-x-2 items-center cursor-default'>
                                         <p>{username}</p>    
-                                        <Link to='/profile'><UserCircleIcon className='w-8 h-8 cursor-pointer hover:text-blue-300' /></Link>
+                                        <button onClick={() => setMenu(!menu)}>{<UserCircleIcon className='w-8 h-8 cursor-pointer hover:text-blue-300' />}</button>
                                     </div>
-                                    <div className='absolute mt-2 w-30 right-1 top-6 group-hover:block hidden shadow bg-white border rounded-lg z-1'>
+                                    <div className={`${menu ? "absolute mt-2 w-30 right-1 top-6 shadow bg-white border opacity-0 scale-95 rounded-lg z-1 animate-dropdown-open" : "absolute mt-2 w-30 right-1 top-6  opacity-100 scale-100 bg-white border rounded-lg z-1 animate-dropdown-close"}`}>
                                         <Link to='/profile' className='block hover:bg-gray-200 text-center rounded-t-lg'>Profile</Link>
                                         <button onClick={HandleLogout} className='w-full text-center hover:bg-gray-200 rounded-b-lg cursor-pointer'>Sign out</button>
                                     </div>
@@ -78,9 +80,9 @@ const Navbar = () => {
                             <div className='relative group'>
                                 <div className='flex gap-x-2 items-center cursor-default'>
                                     <p>Guest</p>    
-                                    <UserCircleIcon className='w-8 h-8 cursor-pointer hover:text-blue-300' />
+                                    <button onClick={() => setMenu(!menu)}>{<UserCircleIcon className='w-8 h-8 cursor-pointer hover:text-blue-300' />}</button>
                                 </div>
-                                <div className='absolute mt-2 w-30 right-1 top-6 group-hover:block hidden shadow bg-white border rounded-lg z-1'>
+                                <div className={`${menu ? "absolute mt-2 w-30 right-1 top-6 shadow bg-white border opacity-0 scale-95 rounded-lg z-1 animate-dropdown-open" : "absolute mt-2 w-30 right-1 top-6  opacity-100 scale-100 bg-white border rounded-lg z-1 animate-dropdown-close"}`}>
                                     <Link to='/login' className='block hover:bg-gray-200 text-center rounded-t-lg'>Login</Link>
                                     <Link to='/register' className='block hover:bg-gray-200 text-center rounded-b-lg'>Sign up</Link>
                                 </div>

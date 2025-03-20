@@ -32,7 +32,7 @@ app.get('/products',(req: Request, res: Response) => {
 })
 
 app.post('/cart', (req: Request, res:Response) => {
-    const query = 'SELECT products.id, products.price, products.name, FORMAT(products.price, 0) as formatted_price, FORMAT(SUM(price) OVER(),0) as total FROM cart JOIN products on cart.product_id = products.id WHERE user_id = ?';
+    const query = 'SELECT number, products.id, products.price, products.name, FORMAT(products.price, 0) as formatted_price, FORMAT(SUM(price) OVER(),0) as total FROM cart JOIN products on cart.product_id = products.id WHERE user_id = ?';
     const id = req.body.id;
     database.query(query, [id], (err, result) => {
         if (err) console.error(err);
@@ -42,7 +42,7 @@ app.post('/cart', (req: Request, res:Response) => {
     })
 })
 
-app.post('/cart/remove', (req: Request, res: Response) => {
+app.post('/cart/remove_button', (req: Request, res: Response) => {
     const {user_id, product_id} = req.body; 
     const query = 'DELETE FROM cart WHERE user_id = ? && product_id = ?';
     const values = [user_id, product_id];
@@ -53,12 +53,40 @@ app.post('/cart/remove', (req: Request, res: Response) => {
 })
 
 app.post('/cart/add', (req: Request, res: Response) => {
-    const {user_id, product_id} = req.body;
-    const query = 'INSERT INTO cart (user_id, product_id) VALUES (?, ?)';
+    const {user_id, product_id, quantity} = req.body;
+    const checkquery = 'SELECT number FROM cart WHERE user_id = ? && product_id = ?'
     const values = [user_id, product_id]
-    database.query(query, values, (err, result) => {
+    database.query(checkquery, values, (err, result : mysql.RowDataPacket[]) => {
+        if(err) console.error(err);
+        else {
+            if(result.length > 0) {
+                    const number = result[0].number + 1;
+                    const values = [number, user_id, product_id];
+                    const query = 'UPDATE cart SET number = ? WHERE user_id = ? && product_id = ?'
+                    database.query (query, values, (err, result) => {
+                        if (err) console.error(err)
+                        else res.status(200).json({message: "Product added!"})
+                    })
+            }
+            else {
+                const query = 'INSERT INTO cart (user_id, product_id) VALUES (?, ?)'
+                const values = [user_id, product_id]
+                database.query (query, values, (err, result) => {
+                    if(err) console.error(err);
+                    else res.status(200).json({message: "Product added!"})
+                })
+            }
+        }
+    })
+})
+
+app.post('/cart/add&subtract', (req: Request, res: Response) => {
+    const {user_id, product_id, number} = req.body
+    const query = 'UPDATE cart SET number = ? WHERE user_id = ? && product_id = ?'
+    const values = [number, user_id, product_id]
+    database.query(query, values, (err,result) => {
         if (err) console.error(err)
-        else res.status(200).json({message: "Added successfully"})
+        else res.status(200).json({message: "updated"})
     })
 })
 
