@@ -60,4 +60,48 @@
             transform-origin: top right;
         }
     }
+
+    --animate-navbar-toggle-on: navbar-toggle-on ease-out 400ms 1 forwards;
+    @keyframes navbar-toggle-on {
+        0% {
+            width: 0;
+            visibility: hidden;
+        }
+        100% {
+            width: 240px;
+            visibility: visible;
+        }
+    }
+
+    --animate-navbar-toggle-off: navbar-toggle-off ease-out 400ms 1 forwards;
+    @keyframes navbar-toggle-off {
+            0% {
+                width: 240px;
+                visibility: visible;
+            }
+            100% {
+                width: 0;
+                visibility: hidden;
+            }
+    }
+
+    --animate-navbar-text-on: navbar-text-on ease-out 200ms 1 forwards;
+    @keyframes navbar-text-on {
+        0% {
+            opacity: 0;
+        }
+        100% {
+            opacity: 100;
+        }
+    }
+
+    --animate-navbar-text-off: navbar-text-off ease-in 200ms 1 forwards;
+    @keyframes navbar-text-off {
+        0% {
+            opacity: 100;
+        }
+        100% {
+            opacity: 0;
+        }
+    }
 }

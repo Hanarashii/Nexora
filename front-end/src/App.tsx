@@ -1,14 +1,11 @@
 import { lazy } from "react";
 import { Route, Routes, BrowserRouter as Router } from "react-router-dom";
-import ProtectedRoute from "./components/ProtectedRoute";
-import RootState from "./type/rootstate";
-import { useSelector } from "react-redux";
+
+const AdminLayout = lazy(() => import('./layouts/AdminLayout'))
+const CustomerLayout = lazy(() => import('./layouts/CustomerLayout'))
 
 
-// const ProtectedRoute = lazy(() => import('./components/ProtectedRoute'))
-
-const Navbar = lazy(() => import('./components/navbar'))
-// const Footer = lazy(() => import('./components/footer'))
+const ProtectedRoute = lazy(() => import('./components/ProtectedRoute'))
 
 const Home = lazy(() => import('./pages/home'))
 const Register = lazy(() => import('./pages/register'))
@@ -18,14 +15,12 @@ const AdminDashboard = lazy(() => import('./adminPages/adminDashboard'))
 const Cart = lazy(() => import('./pages/cart'))
 
 export default function App() {
-
-    const user = useSelector((state : RootState) => state.user.role)
     
     return (
         <Router>
-            <Navbar />
             <Routes>
-                <Route path="/" element={<Home />} />
+                <Route path="/" element={<CustomerLayout />} >
+                <Route index element={<Home />} />
                 <Route path='home' element={<Home />} />
 
                 {/*Login and Register*/}
@@ -39,6 +34,10 @@ export default function App() {
                         <Cart />
                     </ProtectedRoute>
                 } />
+            </Route>
+                <Route path='/admin' element={<AdminLayout />}>
+                    <Route index element={<AdminDashboard />} />
+                </Route>
             </Routes>
             {/* <Footer /> */}
         </ Router>

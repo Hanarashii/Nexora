@@ -60,7 +60,7 @@ const Navbar = () => {
                                         <button onClick={() => setMenu(!menu)}>{<UserCircleIcon className='w-8 h-8 cursor-pointer hover:text-blue-300' />}</button>
                                     </div>
                                     <div className={`${menu ? "absolute mt-2 w-30 right-1 top-6 shadow bg-white border opacity-0 scale-95 rounded-lg z-1 animate-dropdown-open" : "absolute mt-2 w-30 right-1 top-6  opacity-100 scale-100 bg-white border rounded-lg z-1 animate-dropdown-close"}`}>
-                                        <Link to='/admin_dashboard' className='block hover:bg-gray-200 text-center rounded-t-lg'>Dashboard</Link>
+                                        <Link to='/admin' className='block hover:bg-gray-200 text-center rounded-t-lg'>Dashboard</Link>
                                         <button onClick={HandleLogout} className='w-full text-center hover:bg-gray-200 rounded-b-lg cursor-pointer'>Sign out</button>
                                     </div>
                                 </div>
